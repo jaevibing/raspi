@@ -18,12 +18,12 @@ async def LED(i):
     if i == 0:
         pin = 18
     GPIO.output(pin, GPIO.HIGH)
-    time.sleep(2)
+    await asyncio.sleep(2)
     GPIO.output(pin, GPIO.LOW)
 
 @app.route("/toggleLED", methods=["GET"])
 def toggleLED():
-    LED(0)
+    asyncio.run(LED(0))
     return (jsonify(success=True))
 
 @app.route("/togglescream", methods=["GET"])
@@ -36,8 +36,8 @@ def togglescream():
 
 @app.route("/chungus", methods=["GET"])
 def chungus():
-    LED(1)
+    asyncio.run(LED(1))
     return (jsonify(success=True))
 
 if __name__ == '__main__':
-    app.run(debug=True, port=80, host='0.0.0.0')
+    app.run()
