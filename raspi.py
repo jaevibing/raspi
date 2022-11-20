@@ -29,10 +29,11 @@ def toggleLED():
 
 @app.route("/togglescream", methods=["GET"])
 def togglescream():
+    buzz = GPIO.PWM(27, request.args.get("freq"))
     if request.args.get("isOn") == True:
-        GPIO.output(27, GPIO.LOW)
+        buzz.stop()
     else:
-        GPIO.output(27, GPIO.HIGH)
+        buzz.start(1)
     return (jsonify(success=True))
 
 @app.route("/chungus", methods=["GET"])
