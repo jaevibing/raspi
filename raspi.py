@@ -9,7 +9,8 @@ bigchungus = 11
 screamer = 13
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(led, GPIO.OUT)
+for i in (led, bigchungus, screamer):
+    GPIO.setup(i, GPIO.OUT)
 
 app = Flask(__name__)
 
