@@ -14,3 +14,6 @@ def led():
     GPIO.output(led, GPIO.HIGH)
     time.sleep(0.2)
     GPIO.output(led, GPIO.LOW)
+    
+if __name__ == '__main__':
+    app.run()
