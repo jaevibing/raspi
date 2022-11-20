@@ -5,8 +5,8 @@ import RPi.GPIO as GPIO
 
 # references, not actual variables
 led = 18
-bigchungus = 11
-screamer = 13
+bigchungus = 17
+screamer = 27
 
 GPIO.setmode(GPIO.BCM)
 for i in (led, bigchungus, screamer):
@@ -17,7 +17,7 @@ app = Flask(__name__)
 async def LED(i):
     pin = 11
     if i == 0:
-        pin = 18
+        pin = 17
     GPIO.output(pin, GPIO.HIGH)
     await asyncio.sleep(2)
     GPIO.output(pin, GPIO.LOW)
@@ -30,9 +30,9 @@ def toggleLED():
 @app.route("/togglescream", methods=["GET"])
 def togglescream():
     if request.args.get("isOn") == True:
-        GPIO.output(13, GPIO.LOW)
+        GPIO.output(27, GPIO.LOW)
     else:
-        GPIO.output(13, GPIO.HIGH)
+        GPIO.output(27, GPIO.HIGH)
     return (jsonify(success=True))
 
 @app.route("/chungus", methods=["GET"])
