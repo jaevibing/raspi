@@ -15,9 +15,9 @@ for i in (led, bigchungus, screamer):
 app = Flask(__name__)
 
 async def LED(i):
-    pin = 11
+    pin = 17
     if i == 0:
-        pin = 17
+        pin = 18
     GPIO.output(pin, GPIO.HIGH)
     await asyncio.sleep(2)
     GPIO.output(pin, GPIO.LOW)
