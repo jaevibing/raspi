@@ -50,7 +50,7 @@ def togglescream():
 
 @app.route("/setfreq", methods=["GET"])
 def setfreq():
-    buzz = GPIO.PWM(27, int(request.args.get("freq")))
+    asyncio.run(setFreq(int(request.args.get("freq"))))
     return (jsonify(success=True))
 
 @app.route("/chungus", methods=["GET"])
