@@ -42,7 +42,7 @@ def toggleLED():
 
 @app.route("/togglescream", methods=["GET"])
 def togglescream():
-    if request.args.get("isOn") == True:
+    if request.args.get("isOn") == 'true':
         buzz.stop()
     else:
         buzz.start(1)
