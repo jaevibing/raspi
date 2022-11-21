@@ -11,6 +11,7 @@ screamer = 27
 GPIO.setmode(GPIO.BCM)
 for i in (led, bigchungus, screamer):
     GPIO.setup(i, GPIO.OUT)
+buzz = GPIO.PWM(screamer, 1000)
 
 app = Flask(__name__)
 
@@ -22,6 +23,18 @@ async def LED(i):
     await asyncio.sleep(2)
     GPIO.output(pin, GPIO.LOW)
 
+async def setFreq(i):
+    buzz = GPIO.PWM(screamer, i)
+    await asyncio.sleep(0.1)
+
+async def screamON():
+    buzz.start(1)
+    await asyncio.sleep(0.1)
+
+async def screamOFF():
+    buzz.stop()
+    await asyncio.sleep(0.1)
+    
 @app.route("/toggleLED", methods=["GET"])
 def toggleLED():
     asyncio.run(LED(0))
@@ -29,11 +42,15 @@ def toggleLED():
 
 @app.route("/togglescream", methods=["GET"])
 def togglescream():
-    buzz = GPIO.PWM(27, request.args.get("freq"))
     if request.args.get("isOn") == True:
         buzz.stop()
     else:
         buzz.start(1)
+    return (jsonify(success=True))
+
+@app.route("/setfreq", methods=["GET"])
+def setfreq():
+    buzz = GPIO.PWM(27, int(request.args.get("freq")))
     return (jsonify(success=True))
 
 @app.route("/chungus", methods=["GET"])
